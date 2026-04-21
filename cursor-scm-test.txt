@@ -1,0 +1,1 @@
+Cursor source control test — safe to delete after you confirm the sidebar shows this file.
