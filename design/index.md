@@ -9,17 +9,23 @@ This file is updated by the `propose-adr`, `derive-spec`,
 or accept artifacts. Keep entries concise — this is an index, not a
 re-explanation.
 
-## Status: Phase 1 ingest complete
+## Status: Phase 2 scope accepted
 
-The GDD has been copied into [`design/gdd/GDD.md`](gdd/GDD.md).
-Canonical vocabulary has been extracted from the GDD's own
-Section 14.1 glossary into
+The GDD is canon at [`design/gdd/GDD.md`](gdd/GDD.md). Canonical
+vocabulary has been extracted from the GDD's own Section 14.1
+glossary into
 [`.cursor/rules/30-domain-language.mdc`](../.cursor/rules/30-domain-language.mdc).
-An apparent-scope summary derived from Section 14.2 of the GDD is in
-[`design/gdd/apparent-scope-summary.md`](gdd/apparent-scope-summary.md).
 
-No scope decision (Phase 2) has been made. No domain docs (Phase 4),
-tech designs (Phase 3+), or ADRs exist yet.
+**Prototype scope is decided.** See
+[`design/scope/prototype-scope.md`](scope/prototype-scope.md),
+governed by [ADR 0001](decisions/0001-prototype-scope.md).
+
+The Phase-1 `design/gdd/apparent-scope-summary.md` derivation was
+subsumed by the accepted scope and has been retired.
+
+No domain docs (Phase 4) or tech designs (Phase 3+) exist yet. The
+Battle / network tech design is the next anticipated artifact,
+followed by ADR 0002 (stack selection).
 
 ## GDD — `design/gdd/`
 
@@ -46,20 +52,20 @@ tech designs (Phase 3+), or ADRs exist yet.
 
 ## Prototype scope — `design/scope/`
 
-_Empty. Produced in Phase 2 via `derive-spec` wrapped in an ADR._
-
 The GDD's own Section 14.2 is the author-authored starting point for
-the prototype-scope decision; see
-[`design/gdd/apparent-scope-summary.md`](gdd/apparent-scope-summary.md)
-for a derived summary that maps it to GDD sections.
+the prototype-scope decision. The accepted scope extends §14.2 by
+resolving the open questions §14.2 does not answer.
 
-- `design/scope/prototype-scope.md` — _(pending Phase 2)_
+- [`design/scope/prototype-scope.md`](scope/prototype-scope.md) —
+  accepted 2026-04-22 via [ADR 0001](decisions/0001-prototype-scope.md).
 
 ## Domain models — `design/domain/`
 
 _Empty. Produced in Phase 4, one per in-scope subsystem._
 
-Anticipated (not yet canonical; will be decided in Phase 2):
+The prototype-scope spec's Cross-domain seams section implies the
+following split; each domain doc will cite the governing GDD
+section plus the prototype scope:
 
 - Character (derives from GDD §3)
 - Ability (derives from GDD §4)
@@ -74,13 +80,15 @@ design cites its governing domain doc and the ADRs that bear on it._
 
 ## ADRs — `design/decisions/`
 
-_Empty. First ADR is expected to be `0001-stack-selection.md` in Phase 3._
+The first ADR is [`0001-prototype-scope.md`](decisions/0001-prototype-scope.md),
+accepting the prototype scope. The anticipated next ADR is
+`0002-stack-selection.md` in Phase 3.
 
 ### ADR log
 
-| # | Title | Status | Date | Supersedes |
-|---|-------|--------|------|------------|
-|   |       |        |      |            |
+| #    | Title           | Status   | Date       | Supersedes |
+|------|-----------------|----------|------------|------------|
+| 0001 | [Prototype scope](decisions/0001-prototype-scope.md) | Accepted | 2026-04-22 | —          |
 
 ## Cross-reference (populated as artifacts accrue)
 
@@ -101,6 +109,15 @@ _Empty. First ADR is expected to be `0001-stack-selection.md` in Phase 3._
 Deferred concerns from accepted ADRs and tech designs that are
 tracked outside the artifact itself.
 
-| Origin | Description | Due | Status |
-|--------|-------------|-----|--------|
-|        |             |     |        |
+| Origin   | Description | Due phase | Status |
+|----------|-------------|-----------|--------|
+| ADR 0001 #2  | Mastery passive-tree nodes for Blademaster, Pyromancer, Assassin (incl. signature passives) | Phase 2.5 | Open |
+| ADR 0001 #3  | ~52-ability roster under taxonomic + interaction coverage rubrics | Phase 2.5 | Open |
+| ADR 0001 #4  | Practice-mode AI specification, game-designer reviewed | Phase 3+  | Open |
+| ADR 0001 #5  | Resolve Focus ability values (Hex, Mend) | Phase 3+  | Open |
+| ADR 0001 #6  | Propose GDD edit for Trinket mechanics if items are added | On demand | Open |
+| ADR 0001 #7  | Small `derive-spec` skill edit: codify "cite, don't restate" | Tier C    | Open |
+| ADR 0001 #9  | Battle / network tech design (authority split, state-sync, disconnect/reconnect policy) | Phase 3   | Open |
+| ADR 0001 #10 | Battle tech-design scenario test harness (interaction coverage + latent ITEM path) | Phase 3   | Open |
+| ADR 0001 #11 | Anti-cheat posture before any non-trusted-circle playtest access | Before wide playtest | Open |
+| ADR 0001 #12 | Playtest runbook (build labeling, log paths, bug-report template) | Before first playtest | Open |
