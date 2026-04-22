@@ -1,0 +1,40 @@
+---
+description: How to start a session. Use when opening a new chat or returning after context loss.
+---
+
+# Session bootstrap
+
+Every non-trivial session in this repo starts with the `session-brief`
+skill. The brief is a one-screen artifact that anchors the session to
+canon and declares the tier before any work begins.
+
+## Required steps
+
+1. **Read [`AGENTS.md`](../../AGENTS.md) in full.** It is the entry point.
+   Do not skip this even if you think you remember it — each session has
+   fresh memory; the drift this project defends against starts here.
+2. **Consult [`design/index.md`](../../design/index.md)** for the
+   cross-reference of domain → tech → ADRs relevant to what the user is
+   asking about.
+3. **Produce the session brief** via the `session-brief` skill. The
+   brief must answer, in this order:
+   - What are we trying to accomplish this session?
+   - Which canonical docs govern this work? (cite paths and sections)
+   - What is the proposed tier? (A, B, or C — with reasoning)
+   - What is unknown or ambiguous and needs a human answer first?
+4. **Run the `canon-guardian` subagent** against the brief to confirm
+   it correctly identifies the governing canon.
+5. **Only then begin planning or implementing.**
+
+## Skipping the brief
+
+The only time you may skip the brief is for a Tier C change explicitly
+scoped to a single trivial edit stated clearly by the human
+(e.g. "fix this typo"). In that case, still confirm it is actually
+Tier C before proceeding.
+
+## When you lose context mid-session
+
+If the context is compacted or you otherwise feel uncertain about
+where you are, re-run the brief. It is cheap and it is the cheapest
+drift defense in this workflow.

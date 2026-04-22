@@ -1,0 +1,91 @@
+---
+description: Tiered review gates. Every change is Tier A, B, or C. Declare the tier before planning.
+alwaysApply: true
+---
+
+# Tiered review gates
+
+Every proposed change is classified into one tier before work begins.
+The tier is declared in the session-brief and honored throughout.
+The `verifier` subagent re-checks tier classification after the change;
+mis-classification is itself a drift event and is escalated.
+
+## Tier A — strict gate (markdown-first)
+
+**Triggers**
+
+- Introduces or changes a domain concept.
+- Introduces or changes a technical boundary: new service, datastore,
+  protocol, major dependency, deployment target.
+- Changes a module interface: shared types, API contracts, schema.
+- Changes any rule or balance value derived from the GDD.
+- Introduces or changes a cross-cutting concern: auth, persistence,
+  networking, state management.
+
+**Process**
+
+1. AI drafts the governing artifact: ADR, and spec or tech-design
+   update if applicable. Use `propose-adr`, `derive-spec`, or
+   `draft-tech-design` as appropriate.
+2. Run the role quartet in parallel: `architect`, `engineer`,
+   `game-designer`, `operator`. Each produces a structured critique
+   in its signature format.
+3. Synthesize the four critiques into an `Addressed concerns` section
+   on the revised ADR or tech design. Note any concern explicitly
+   deferred, with a tracked follow-up.
+4. Run `skeptic` as a final adversarial pass. Address its findings in
+   the same `Addressed concerns` section.
+5. Present the synthesis to the human (raw critiques collapsed
+   underneath) and get explicit approval. **No code is written until
+   approval is given.**
+6. Implement in Agent Mode. The implementation cites the ADR by path
+   in the commit message.
+7. `verifier` subagent reviews the diff against the approved ADR.
+8. `explain-like-im-not-a-coder` produces the change summary.
+9. Human approves the change. Commit.
+
+## Tier B — light gate
+
+**Triggers**
+
+- Implementation strictly within an already-approved spec or tech design.
+- Refactoring that preserves all interfaces and observable behavior.
+- Adding tests.
+- Fixing a bug without changing specified behavior.
+
+**Process**
+
+1. Plan-mode plan citing the governing spec.
+2. Implement.
+3. `verifier` subagent reviews the diff.
+4. `explain-like-im-not-a-coder` produces the change summary.
+5. Human approves. Commit citing the parent spec.
+
+## Tier C — auto
+
+**Triggers**
+
+- Formatting, whitespace, comment typos.
+- Obvious, local typo fixes.
+- Non-semantic reorderings (imports, alphabetization).
+
+**Process**
+
+- Happens inline. Surfaced in the session summary. No gate.
+
+## Tier-up rule
+
+If a change does not clearly fit Tier B or Tier C, treat it as Tier A.
+Ambiguity resolves **upward**, not downward. The cost of an
+unnecessary Tier A review is a few minutes of compute; the cost of a
+missed Tier A review compounds over the life of the project.
+
+## Mis-tiered changes
+
+If the `verifier` subagent determines the actual diff warranted a
+higher tier than was declared:
+
+1. The implementation is paused, not committed.
+2. The change is re-run through the higher tier's gate.
+3. The mis-tiering is noted in the session summary so the tier rule
+   can be refined if the same case recurs.

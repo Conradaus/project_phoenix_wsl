@@ -1,0 +1,66 @@
+---
+description: Anti-patterns. Things the agent must not do in this repo.
+alwaysApply: true
+---
+
+# Negative constraints
+
+The following are hard prohibitions. Violating any of them is a drift
+event and must be reported in the session summary.
+
+## Silent decisions
+
+- **Do not choose between reasonable alternatives without an ADR.**
+  If more than one answer could be right and each has different
+  consequences, stop and draft an ADR or ask the human.
+- **Do not guess on unknown facts.** If something required to proceed
+  is not stated in the canonical docs and not general knowledge, ask.
+
+## Canonical design protection
+
+- **Do not edit `design/gdd/**` directly.** The only sanctioned path is
+  the `propose-gdd-edit` skill, which produces a reviewable diff.
+- **Do not edit `design/scope/**` or `design/decisions/**` directly.**
+  Use `propose-adr`; scope changes are Tier A.
+- The hook layer enforces this; attempts to bypass are drift events.
+
+## Citation discipline
+
+- **Every non-Tier-C change must cite its governing canonical artifact**
+  in the session-brief, in the commit message, and in the plain-English
+  summary. An uncited material change is a drift event.
+
+## Scope discipline
+
+- **No drive-by refactors.** Do not modify files outside the stated
+  scope of the current change, even if you see something to improve.
+  Queue follow-ups in the session summary instead.
+- **No new dependencies without an ADR.** Adding, upgrading a major
+  version of, or removing a dependency is Tier A.
+
+## Interface discipline
+
+- **No silent refactors across module boundaries.** Changing a shared
+  type, an exported function signature, an API contract, or a schema
+  is Tier A regardless of the size of the code change.
+
+## Gate discipline
+
+- **Do not bypass the role quartet on Tier A.** Four distinct-prior
+  critics is the main drift defense; collapsing their voices defeats it.
+- **Do not skip the verifier on Tier B.** Even small changes drift.
+- **Do not commit without human approval on Tier A or Tier B.** Tier C
+  changes may be batched into the session commit.
+
+## Plain-English discipline
+
+- **Do not hand the human a diff without a plain-English summary.** The
+  human is a game designer, not a programmer. Reviewing code directly
+  is not the review they can do best. If no `explain-like-im-not-a-coder`
+  output exists, the change is not ready.
+
+## Tier-up default
+
+- **When in doubt on a tier, tier up.** The rule is asymmetric for a
+  reason: missed Tier A changes compound; unnecessary Tier A reviews
+  do not.

@@ -1,0 +1,56 @@
+---
+description: Canonical hierarchy of truth. Every material change must cite its parent artifact.
+alwaysApply: true
+---
+
+# Canon: the hierarchy of truth
+
+This project has a single canonical chain. All technical artifacts are
+derived from the layer above. AI drafts, human approves, approved
+content becomes canonical and is referenced thereafter — not re-derived.
+
+```
+GDD -> Prototype Scope -> Domain Models -> Tech Designs -> ADRs -> Code
+```
+
+- [`design/gdd/`](../../design/gdd) — the Game Design Document. Human-owned.
+  Hook-protected. Never edit without the `propose-gdd-edit` skill.
+- [`design/scope/`](../../design/scope) — what GDD subsystems this prototype
+  implements, at what fidelity. Hook-protected. Modify only through
+  `propose-adr` (a scope change is a Tier A decision).
+- [`design/domain/`](../../design/domain) — one doc per major domain concept
+  (Character, Ability, Combat, Equipment, ...). Plain English + mermaid
+  state diagrams + invariants.
+- [`design/tech/`](../../design/tech) — one tech design per subsystem;
+  derived from its domain doc(s).
+- [`design/decisions/`](../../design/decisions) — numbered ADRs recording
+  each technical decision with context, alternatives, decision, and
+  consequences. Hook-protected.
+- [`design/index.md`](../../design/index.md) — master cross-reference.
+
+## Citation rule
+
+Every non-trivial change must cite its governing canonical artifact:
+
+- In the session-brief.
+- In the commit message.
+- In the plain-English change summary.
+
+If the governing artifact does not exist yet, the change is not ready.
+Create the governing artifact first through the appropriate skill.
+
+## Code derives from docs
+
+If code and doc disagree, the doc is authoritative by default. The
+resolution is either:
+
+- fix the code to match the doc (most common), or
+- update the doc through an ADR recognizing that the doc was wrong.
+
+Do not "fix" the mismatch silently.
+
+## When canon is unclear
+
+If you cannot identify the canonical artifact governing a change, stop
+and ask the human. Silent assumption is the exact drift failure mode
+the project is defending against.

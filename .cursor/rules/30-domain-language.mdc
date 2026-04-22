@@ -1,0 +1,151 @@
+---
+description: Canonical vocabulary for Project Phoenix. Extracted from the GDD's own glossary (Section 14.1). Specs, tech designs, ADRs, and code must use these terms exactly — synonyms and near-synonyms are drift.
+alwaysApply: true
+---
+
+# Domain language
+
+Canonical vocabulary for Project Phoenix, extracted verbatim from
+[`design/gdd/GDD.md` §14.1](../../design/gdd/GDD.md#141-glossary-of-terms)
+and cross-linked to the defining sections.
+
+This list is the **authoritative naming source** for the project.
+Any term used in a spec, tech design, ADR, or piece of code must
+either appear here or be proposed for addition via `propose-gdd-edit`.
+Synonyms, aliased forms, or near-synonyms are drift and will be
+flagged by the `verifier` and `game-designer` subagents.
+
+## Core mechanics and systems
+
+- **Ability Rank** — Star level (★ to ★★★★★) of an ability item; scales base values independently of Ability Level. Defined in GDD §4.8.5.
+- **Ability Type** — BASIC, CORE, ULTIMATE, or ITEM. Defined in GDD §4.1.2.
+- **Active Equipment** — Equipment that grants abilities (Weapons, Shields, Focuses, Trinkets, Consumables). Defined in GDD §6.1.1.
+- **Ailment** — Damage-over-time effect (Poison, Bleed, Ignite). Defined in GDD §7.6.
+- **Armor** — Flat reduction to physical damage; from equipment only. Defined in GDD §7.7.2.
+- **Base Attribute** — Attribute value from level-up allocation only; used for equipment/ability requirements. Defined in GDD §3.4.1, §6.3.4.
+- **Base Stats** — Power numbers that scale with Rank (equipment and abilities). Defined in GDD §6.5.2.
+- **Battle Phase** — One of six turn steps; canonical identifiers: `INITIATIVE`, `START_OF_TURN`, `ACTION_SELECTION`, `REACTION_SELECTION`, `EXECUTION`, `END_OF_TURN`. Defined in GDD §7.3.
+- **Basic Ability** — Ability granted by Active equipment or innate (Punch, Jab, Rest). Defined in GDD §4.4.
+- **Blessing** — Temporary positive effect from an ability; removable. Defined in GDD §4.10.1.
+- **Bonus Action** — Quick action, cannot be reacted to, resets at turn start. Defined in GDD §4.5.2.
+- **Class Trainer** — NPC (one per class) for class-specific ability crafting (Distill, Learn, Hone) and mastery selection. Defined in GDD §8.1, §11.2.
+- **Conditional** — Tag identifying an ability that requires a game-state condition to activate. Defined in GDD §4.5.7.
+- **Core Ability** — Main collectible ability; has Rarity and Rank; levelable via loadout Skill Points. Defined in GDD §4.8.1.
+- **Curse** — Temporary negative non-damage effect from an ability; removable by Immune. Defined in GDD §4.10.2.
+- **Defenses** — Armor, Magic Resistance, and Shield collectively. Defined in GDD §7.7.1.
+- **Discipline** — Thematic school grouping abilities (Combat, Agility, Sorcery, Divine); used for effect targeting. Defined in GDD §4.2.1.
+- **Distill** — Trainer/Tutor service: break down an ability into Essence. Defined in GDD §11.2.3.
+- **Empower** — Core ability tagged EMPOWER that augments a Basic ability. Defined in GDD §4.5.5.
+- **Essence** — Universal ability crafting currency from Distilling; used for Learning abilities. Defined in GDD §11.1.3.
+- **Fixed Properties** — Equipment properties that never scale (slot, tags, two-handed, requirements). Defined in GDD §6.5.1.
+- **Focus** — INT-based off-hand equipment (Grimoire, Tome); caster fantasy. Defined in GDD §6.4.2.
+- **Force (naming)** — Naming convention for Mage physical damage abilities (e.g., Force Strike). Defined in GDD §6.4.1.
+- **Forge** — Blacksmith service: spend Materials to create specific equipment. Defined in GDD §6.7.2.
+- **Gambler** — NPC for random equipment pulls (slot-targeted, gold sink). Defined in GDD §8.1, §11.2.1.
+- **Hard Reset** — Initiative resets to 0 on turn start (excess lost); ensures turn character always resolves last in execution. Defined in GDD §7.1.1.
+- **Heavy (naming)** — Naming convention for 2H weapon abilities (e.g., Heavy Slash, Heavy Bash). Defined in GDD §6.4.1.
+- **Initiative** — Resource accumulated proportional to Speed; at ≥100, character takes a turn (CTB model). Hard resets to 0 after turn. Defined in GDD §7.1.
+- **Jab** — Innate Basic ability; unarmed off-hand attack. Defined in GDD §4.4.
+- **Learn** — Trainer/Tutor service: spend Essence to create a specific ability. Defined in GDD §11.2.3.
+- **Loadout** — Complete character build (attributes, equipment, abilities). Defined in GDD §5.1.
+- **Hone** — Trainer/Tutor service: feed duplicate ability copies to increase Rank. Defined in GDD §11.2.3.
+- **Materials** — Universal equipment crafting currency from Salvaging; used for Forging equipment. Defined in GDD §11.1.2.
+- **Mods** — Predefined effects on equipment; never scale with Rank. Defined in GDD §6.5.3.
+- **Normal Action** — Main turn action, triggers Reaction Phase. Defined in GDD §4.5.1.
+- **Oracle** — NPC for random ability pulls (class-targeted, gold sink). Defined in GDD §8.1, §11.2.2.
+- **Passive (buff)** — Permanent positive effect from an ability; can be suppressed, never removed. Defined in GDD §4.10.1.
+- **Passive Equipment** — Equipment that provides stats only (Body, Helmet, Boots, Ring, Amulet). Defined in GDD §6.1.2.
+- **Power** — Scaling stat (Combat, Agility, Sorcery, Divine); 1:1 from attributes. Defined in GDD §4.2.2.
+- **Punch** — Innate Basic ability; unarmed main-hand attack. Defined in GDD §4.4.
+- **Rank** — Star level (★ to ★★★★★); scales Base Stats for both equipment and abilities. Defined in GDD §6.6.2.
+- **Rarity** — Item tier (Common→Legendary); determines base Rank, mods, and level requirements. Defined in GDD §6.6.1.
+- **Reaction** — Ability used by non-turn characters in response to the turn character's Normal Action. Defined in GDD §4.5.3, §7.3.1.
+- **Reactor** — Any non-turn character during the Reaction and Execution phases. Defined in GDD §7.3.1.
+- **Resolve** — Resource for Ultimates; generated from combat damage. Defined in GDD §3.5.1.
+- **Rest** — Innate Basic ability; restores stamina, always available. Defined in GDD §4.4.
+- **Salvage** — Blacksmith service: break down equipment into Materials. Defined in GDD §6.7.1.
+- **Shield** — Blessing providing temporary HP (FIFO depletion); displayed on HP bar. Defined in GDD §3.5.2, §4.10.3.
+- **Skill Points** — Resource spent in loadout to level Core ability slots (1-10). Defined in GDD §3.6.1, §5.2.3.
+- **Suppression** — Temporarily disabling a Passive without removing it; sources include cooldown, Corrupted, and depletion. Defined in GDD §4.5.6.
+- **Temper** — Blacksmith service: feed duplicate equipment copies to increase Rank. Defined in GDD §6.7.3.
+- **Trigger** — Tag identifying an ability with effects that fire automatically when a condition is met. Defined in GDD §4.5.6.
+- **Trinket** — Active equipment slot; grants a reusable activatable ability. Defined in GDD §6.1.1.
+- **True Damage** — Bypasses all Defenses. Defined in GDD §4.3.
+- **Tutor** — NPC for neutral ability crafting (Distill, Learn, Hone). Defined in GDD §8.1, §11.2.
+- **Type (Equipment)** — Foundation defining stats, properties, requirements, ability. Defined in GDD §6.3.1.
+- **Ultimate Ability** — Class-specific collectible; costs Resolve, cannot be leveled but can be Honed (ranked up). Defined in GDD §4.1.2.
+- **Vanilla** — Equipment with no mods; highest base stats for type. Defined in GDD §6.2.5.
+- **Weapon Set** — Paired Main Hand + Off Hand equipment; two sets per character. Defined in GDD §6.1.3.
+- **Weapon Swap** — Bonus action to switch active Weapon Set; 2-turn cooldown. Defined in GDD §6.1.3.
+
+## Additional canonical concepts (from GDD, not in §14.1)
+
+These terms appear in the GDD with canonical definitions but are not
+in the author's glossary. Treat them with the same discipline as
+glossary entries.
+
+### Classes, masteries, attributes
+
+- **Warrior / Mage / Rogue / Neutral** — The three base classes plus the neutral ability pool. Defined in GDD §3.1, §4.1.1.
+- **Mastery** — Subclass specialization, one of twelve (four per base class). Defined in GDD §3.2.
+- **Mastery Passive Tree** — Each subclass's passive tree unlocked by Mastery Points. Defined in GDD §3.3.
+- **Strength / Dexterity / Intelligence / Faith** — The four primary attributes. Defined in GDD §3.4.1.
+- **Total Attribute** — Base + all modifiers; the effective value used for scaling. Defined in GDD §3.4.1.
+
+### Resources
+
+- **Health (HP)**, **Mana**, **Stamina** — Primary character resources. Defined in GDD §3.5.
+- **Initiative** (see glossary above).
+- **Bonus Action charges** — Resource gating Bonus Actions; default max 1, resets at turn start. Defined in GDD §3.5.
+
+### Action and ability taxonomy
+
+- **Action Type** — NORMAL / REACTION / BONUS / PASSIVE. Defined in GDD §4.1.3.
+- **Tags** — Ability classification set: ATTACK, SPELL, MELEE, RANGED, AOE, BUFF, DEBUFF, PHYSICAL, MAGIC, RECOVERY, CONSUMABLE, EMPOWER, TRIGGER, CONDITIONAL, BLESSING, CURSE. Defined in GDD §4.1.4.
+- **Percentage Empower / Flat Empower** — Two mutually exclusive Empower classes with distinct scaling and variance rules. Defined in GDD §4.5.5.
+- **Trigger Response Types** — Self-contained effect vs ability proxy. Defined in GDD §4.5.6.
+- **Variance Tiers** — Consistent / Standard / Volatile design guideline for ability damage range width. Defined in GDD §4.6.1.
+
+### Status effects
+
+- **Stealth** / **Invulnerable** / **Immune** — Specific Blessings. Defined in GDD §4.10.3.
+- **Slowed** / **Dazed** / **Corrupted** — Specific Curses. Defined in GDD §4.10.3.
+- **Poison** / **Bleed** / **Ignite** — The three Ailments. Defined in GDD §4.10.3, §7.6.
+
+### Combat math
+
+- **Aggregate modifier** — Feeds always-on character totals (max resources, crit chance, etc.). Defined in GDD §4.6.5.
+- **Resolution modifier** — Applies when a specific damage or healing instance is calculated. Defined in GDD §4.6.5.
+- **Pre-mitigation damage** — Ability roll + flats + additive resolution % + crit; input to the mitigation pipeline. Defined in GDD §4.6.5, §7.7.4.
+- **Ignite Priority Queue** — Non-stacking Ignite resolution rule. Defined in GDD §7.6.3.
+
+### Equipment
+
+- **Equipment Slots** — Main Hand, Off Hand, Trinket, Consumable 1, Consumable 2, Amulet, Ring, Helmet, Body, Boots (10 total). Defined in GDD §6.1.
+- **Active set** vs **Inactive set** — The two Weapon Sets. Defined in GDD §6.1.3.
+- **Variance (Body / Helmet / Boots)** — Per-attribute stat themes; see GDD §6.4.3.
+
+### Structure and progression
+
+- **Hub (Town)** — Central navigation structure. Defined in GDD §8.1.
+- **Campaign** / **Zone** / **Boss Encounter** — PvE progression structure. Defined in GDD §8.2.
+- **Casual PvP** / **Ranked PvP** / **Tournaments** — PvP modes. Defined in GDD §8.4.
+- **Gold** — Primary currency. Defined in GDD §11.1.1.
+
+## Forbidden aliases (catch drift early)
+
+When writing code, specs, or docs, **do not use** the following
+aliases — they name concepts that already have canonical names above:
+
+- "stat" → use the specific stat's canonical name (Speed, Accuracy, etc.) or "Base Stats" when referring to the scaled-by-rank family.
+- "buff" as a general noun when you mean a Blessing or Passive — those are the canonical types.
+- "debuff" as a general noun when you mean a Curse or Ailment — those are the canonical types.
+- "spell" as distinct from "ability" — all spells are abilities; use "ability with SPELL tag" when needed.
+- "crafting currency" — use Materials (equipment) or Essence (abilities) specifically.
+- "turn step" or "phase number" — use the `BattlePhase` identifiers: `INITIATIVE`, `START_OF_TURN`, `ACTION_SELECTION`, `REACTION_SELECTION`, `EXECUTION`, `END_OF_TURN`.
+- "random pull" without a specific NPC — use "Gambler pull" (equipment) or "Oracle pull" (abilities).
+
+When unsure whether a term is canonical, default to the exact
+phrasing used in the GDD. If it is not in the GDD, propose adding
+it here (via `propose-gdd-edit` if it is a new design concept, or
+via a scope ADR if it is a derivation).

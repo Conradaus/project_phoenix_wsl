@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "hooks": {
+    "sessionStart": [
+      {
+        "command": ".cursor/hooks/session-start.sh",
+        "failClosed": false
+      }
+    ],
+    "beforeSubmitPrompt": [
+      {
+        "command": ".cursor/hooks/before-submit-prompt.sh",
+        "failClosed": false
+      }
+    ],
+    "preToolUse": [
+      {
+        "matcher": "Write",
+        "command": ".cursor/hooks/canonical-edit-gate.sh",
+        "failClosed": true
+      },
+      {
+        "matcher": "StrReplace",
+        "command": ".cursor/hooks/canonical-edit-gate.sh",
+        "failClosed": true
+      },
+      {
+        "matcher": "Delete",
+        "command": ".cursor/hooks/canonical-edit-gate.sh",
+        "failClosed": true
+      }
+    ],
+    "subagentStop": [
+      {
+        "matcher": "verifier",
+        "command": ".cursor/hooks/verifier-stop.sh",
+        "failClosed": false
+      }
+    ]
+  }
+}
